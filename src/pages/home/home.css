@@ -1,0 +1,17 @@
+.table-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:3rem;
+}
+
+table tr td{
+    border: solid 1px black;
+    padding:1rem;
+}
+
+th {
+    border: solid 1px black;
+    padding:1rem;
+    cursor: pointer;
+}

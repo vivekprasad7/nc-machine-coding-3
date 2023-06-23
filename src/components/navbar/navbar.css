@@ -1,0 +1,39 @@
+.navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:80%;
+    margin:10px auto;
+    padding:1rem 2rem;
+    background-color: black;
+    color:white;   
+    border-radius: 50px; 
+}
+
+.nav-links{
+    width: 40%;;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links a{
+    text-decoration: none;
+    color:white;
+}
+
+.nav-links a:hover{
+    color:red; 
+}
+
+.nav-button button{
+    padding:0.5rem;
+    border-radius: 20px;
+    border:none;
+}
+
+.nav-button button:hover{
+     color:white;
+    background-color: red; 
+    cursor: pointer;
+    font-weight: 600;
+}
