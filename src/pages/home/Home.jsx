@@ -4,8 +4,10 @@ import { useAppContext } from "../../contexts/AppContext";
 import "./home.css"
 
 export const Home = () => {
-  const { snacksData , dispatch, getFilteredProducts, searchData} = useAppContext();
-  const {sortTypeAsc, setSortTypeAsc} = useState(false);
+  const { snacksData , dispatch, getFilteredProducts, searchData, newData} = useAppContext();
+  const [sortTypeAsc, setSortTypeAsc] = useState(false);
+
+  // const newData = getFilteredProducts();
 
   return (
     <div>
@@ -17,15 +19,15 @@ export const Home = () => {
       <thead>
         <tr>
           <th onClick={() => { setSortTypeAsc(!sortTypeAsc); dispatch({ type: "SORT_BY_ID", payload: sortTypeAsc }) }}>ID</th>
-          <th onClick={() => { setSortTypeAsc(!sortTypeAsc); dispatch({ type: "SORT_BY_NAME", payload: "LTH" })}}>Product Name</th>
-          <th onClick={() => { setSortTypeAsc(!sortTypeAsc);dispatch({ type: "SORT_BY_WEIGHT", payload: "LTH" })}}>Weight</th>
-          <th onClick={() => { setSortTypeAsc(!sortTypeAsc);dispatch({ type: "SORT_BY_WEIGHT", payload: "LTH" })}}>Price</th>
-          <th onClick={() => {setSortTypeAsc(!sortTypeAsc); dispatch({ type: "SORT_BY_CALORIES", payload: "LTH" })}}>Calories</th>
+          <th onClick={() => { setSortTypeAsc(!sortTypeAsc); dispatch({ type: "SORT_BY_NAME", payload: sortTypeAsc })}}>Product Name</th>
+          <th onClick={() => { setSortTypeAsc(!sortTypeAsc);dispatch({ type: "SORT_BY_WEIGHT", payload: sortTypeAsc })}}>Weight</th>
+          <th onClick={() => { setSortTypeAsc(!sortTypeAsc);dispatch({ type: "SORT_BY_PRICE", payload: sortTypeAsc })}}>Price</th>
+          <th onClick={() => {setSortTypeAsc(!sortTypeAsc); dispatch({ type: "SORT_BY_CALORIES", payload: sortTypeAsc })}}>Calories</th>
           <th>Ingredients</th>
         </tr>
       </thead>
       <tbody>
-        {searchData.map((snack) => (
+        {newData.map((snack) => (
           <tr key={snack.id}>
             <td>{snack.id}</td>
             <td>{snack.product_name}</td>

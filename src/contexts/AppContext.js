@@ -16,7 +16,9 @@ export const AppContextProvider = ({children}) => {
     function reducer(state, action){
         switch(action.type){
             case "SEARCH":
-                return {...state, userInput: action.payload};
+                if(action.payload.length > 0){
+                    return {...state, userInput: action.payload};
+                }
             case "SORT_BY_ID":
                 return {...state, sortOrder: action.payload ? "LTH" : "HTL", sortBy : "ID"};
             case "SORT_BY_NAME":
@@ -44,25 +46,25 @@ export const AppContextProvider = ({children}) => {
         
         let filteredProducts = snacksData;
     
-        if (state.userInput.length > 0)  {
-            filteredProducts = snacksData.filter((item) => item.product_name.toLowerCase().includes(state.userInput.toLowerCase())) 
+        if (state?.userInput?.length > 0)  {
+            filteredProducts = snacksData.filter((item) => item.product_name.toLowerCase().includes(state?.userInput.toLowerCase())) 
         }
     
-        if (state.sortBy === "ID"){
+        if (state?.sortBy === "ID"){
             filteredProducts = snacksData.sort((a,b) => state.sortOrder === 'LTH' ? a.id - b.id : b.id - a.id) 
         }
 
-        if (state.sortBy === "NAME"){
+        if (state?.sortBy === "NAME"){
             filteredProducts = snacksData.sort((a,b) => state.sortOrder === 'LTH' ? a.product_name - b.product_name : b.product_name - a.product_name) 
         }
 
-        if (state.sortBy === "WEIGHT"){
+        if (state?.sortBy === "WEIGHT"){
             filteredProducts = snacksData.sort((a,b) => state.sortOrder === 'LTH' ? a.product_weight - b.product_weight : b.product_weight - a.product_weight) 
         }
-        if (state.sortBy === "PRICE"){
+        if (state?.sortBy === "PRICE"){
             filteredProducts = snacksData.sort((a,b) => state.sortOrder === 'LTH' ? a.price - b.price : b.price - a.price) 
         }
-        if (state.sortBy === "CALOROIES"){
+        if (state?.sortBy === "CALORIES"){
             filteredProducts = snacksData.sort((a,b) => state.sortOrder === 'LTH' ? a.calories - b.calories : b.calories - a.calories) 
         }
     
@@ -72,6 +74,8 @@ export const AppContextProvider = ({children}) => {
     
     }
 
+    const newData = getFilteredProducts(snacksData, state);
+
 
 
     // const sortData = state.sort.length > 0 ? searchData.sort((a,b) => state.sort === 'LTH' ? a.price - b.price : b.price - a.price) : searchData
@@ -79,7 +83,7 @@ export const AppContextProvider = ({children}) => {
 
 
     return(
-        <AppContext.Provider value={{snacksData, state, dispatch, getFilteredProducts, searchData}}>
+        <AppContext.Provider value={{snacksData, state, dispatch, getFilteredProducts, searchData, newData}}>
             {children}
         </AppContext.Provider>
     )
